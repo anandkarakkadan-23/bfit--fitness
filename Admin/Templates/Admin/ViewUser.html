@@ -1,0 +1,128 @@
+{% extends 'Admin/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <style>
+        td{
+            color: aliceblue;
+        }
+    table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 90%;
+        font-family: Arial, sans-serif;
+        background-color: #1a1a1a; /* black background */
+        color: #2a2a2a; /* white text */
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+    }
+
+    table th, table td {
+        border: 1px solid #ff0000; /* red borders */
+        padding: 12px 15px;
+        text-align: center;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #2a2a2a;
+    }
+
+    table tr:hover {
+        background-color: #400000; /* dark red on hover */
+    }
+
+    table th {
+        background-color: #ff0000;
+        color: #2a2a2a;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+</style>
+</head>
+
+<body>
+    <h1 align="center">View User</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h1>New Users</h1>
+
+        <table class="table table-border table-hover">
+            <tr align="center">
+                <th>SL.NO</th>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+            {% for i in view %}
+            <tr align="center">
+                <td>{{forloop.counter}}</td>
+                <td><img src="{{i.user_photo.url}}" alt="" width="150px"></td>
+                <td>{{i.user_name}}</td>
+                <td>{{i.user_email}}</td>
+                <td>{{i.user_contact}}</td>
+                <td>{{i.user_address}}</td>
+                <td><a href="{% url 'Admin:acceptuser' i.id %}">Accept</a>
+                    <a href="{% url 'Admin:rejectuser' i.id %}">Reject</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table class="table table-border table-hover">
+        <br>
+        <h1>Accepted Users</h1>
+        <table>
+            <tr align="center">
+                <td>SL.NO</td>
+                <td>Photo</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Contact</td>
+                <td>Address</td>
+                <td>Action</td>
+            </tr>
+            {% for i in au %}
+            <tr align="center">
+                <td>{{forloop.counter}}</td>
+                <td><img src="{{i.user_photo.url}}" alt="" width="150px"></td>
+                <td>{{i.user_name}}</td>
+                <td>{{i.user_email}}</td>
+                <td>{{i.user_contact}}</td>
+                <td>{{i.user_address}}</td>
+                <td><a href="{% url 'Admin:rejectuser' i.id %}">Reject</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <h1>Rejected Users</h1>
+        <table class="table table-border table-hover">
+            <tr align="center">
+                <td>SL.NO</td>
+                <td>Photo</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Contact</td>
+                <td>Address</td>
+                <td>Action</td>
+            </tr>
+            {% for i in ru %}
+            <tr align="center">
+                <td>{{forloop.counter}}</td>
+                <td><img src="{{i.user_photo.url}}" alt="" width="150px"></td>
+                <td>{{i.user_name}}</td>
+                <td>{{i.user_email}}</td>
+                <td>{{i.user_contact}}</td>
+                <td>{{i.user_address}}</td>
+                <td><a href="{% url 'Admin:acceptuser' i.id %}">Accept</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+{% endblock %}

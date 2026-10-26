@@ -1,0 +1,106 @@
+{% extends 'Admin/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer</title>
+    <style>
+        td{
+            color: aliceblue;
+        }
+    table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 90%;
+        font-family: Arial, sans-serif;
+        background-color: #1a1a1a; /* black background */
+        color: #2a2a2a; /* white text */
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+    }
+
+    table th, table td {
+        border: 1px solid #ff0000; /* red borders */
+        padding: 12px 15px;
+        text-align: center;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #2a2a2a;
+    }
+
+    table tr:hover {
+        background-color: #400000; /* dark red on hover */
+    }
+
+    table th {
+        background-color: #ff0000;
+        color: #2a2a2a;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+</style>
+</head>
+<body>
+    <h1 align="center">Trainer</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table class="table table-border table-hover">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txt_name" id="txt_name" class="form-control" title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter"
+                    pattern="^[A-Z]+[a-zA-Z ]*$" required placeholder="enter name"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" name="txt_email" class="form-control"id="txt_email" required placeholder="enter email"></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" name="txt_contact"class="form-control" id="txt_contact" pattern="[7-9]{1}[0-9]{9}" 
+                    title="Phone number with 7-9 and remaing 9 digit with 0-9" required placeholder="enter contact"></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td><input type="radio" name="txt_gender" id="txt_gender" value="Male">Male
+                <input type="radio" name="txt_gender" id="txt_gender"  value="Female">Female</td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" name="txt_photo" id="txt_photo" required></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="text" name="txt_password" class="form-control" id="txt_password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" name="txt_pass" required placeholder="enter password"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" class="btn btn-outline-primary" value="submit"></td>
+                <td></td>
+            </tr>
+        </table>
+        <table class="table table-border table-hover">
+            <tr>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Contact</td>
+                <td>Gender</td>
+                <td>photo</td>
+                <td>Action</td>
+            </tr>
+            {% for i in tis %}
+            <tr>
+                <td>{{i.trainer_name}}</td>
+                <td>{{i.trainer_email}}</td>
+                <td>{{i.trainer_contact}}</td>
+                <td>{{i.trainer_gender}}</td>
+                <td><img src="{{i.trainer_photo.url}}" width="100px" height="50px" /></td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    
+</body>
+</html>
+{% endblock %}

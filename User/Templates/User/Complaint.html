@@ -1,0 +1,91 @@
+{% extends 'User/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint</title>
+    <style>
+        /* Table Styles */
+        table {
+            background-color: #f9f9f9; /* Light background color */
+            width: 30%;                /* Optional: sets the width of the table */
+            margin: 20px auto;         /* Centers the table */
+            padding: 10px;             /* Adds padding inside the table */
+            border-radius: 10px;
+        }
+
+        /* Table Header and Body Styles */
+        td {
+            padding: 10px;             /* Adds padding inside each table cell */
+            vertical-align: middle;
+            text-align: center;   /* Centers the content vertically */
+        }
+
+        /* Image Styles */
+        img {
+            width: 200px;              /* Sets the width of the user's photo */
+            border-radius: 50%;        /* Optional: makes the image circular */
+        }
+
+        /* Links Styles */
+        a {
+            text-decoration: none;     /* Removes underline from links */
+            color: #007bff;            /* Sets the link color */
+            margin-right: 10px;        /* Adds space between the links */
+        }
+
+        a:hover {
+            color: #0056b3;            /* Changes the color of links on hover */
+        }
+
+        /* Bold Text for Labels */
+        td strong {
+            font-weight: bold;         /* Makes labels bold */
+        }
+    </style>
+</head>
+<body>
+    <h1 align="center">User Complaint</h1>
+    <form action="" method="post">
+        {%csrf_token%}
+        <table align="center">
+            <tr>
+                <td>Complaint Title</td>
+                <td><input type="text" name="txt_complainttitle" id="txt_complainttitle"  required placeholder="enter complaint title"></td>
+            </tr>
+            <tr>
+                <td>Complaint Content</td>
+                <td><textarea name="txt_complaintcontent" id="txt_complaintcontent"  required placeholder="enter complaint content"></textarea></td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="Submit"></td>
+                <td></td>
+            </tr>
+        </table>
+        <br>
+        <table border="1" align="center">
+            <tr align="center">
+                <td>Sl:NO</td>
+                <td>Title</td>
+                <td>Content</td>
+                <td>Date</td>
+                <td>Reply</td>
+                <td>Action</td>
+            </tr>
+            {% for i in comp %}
+            <tr align="center">
+                <td>{{forloop.counter}}</td>
+                <td>{{i.complaint_title}}</td>
+                <td>{{i.complaint_content}}</td>
+                <td>{{i.complaint_date}}</td>
+                <td>{{i.complaint_reply}}</td>
+                <td><a href="{% url 'User:delcomplaint' i.id %}">Delete</a></td>
+            </tr>
+            {%endfor%}
+        </table>
+    </form>
+</body>
+</html>
+{% endblock %}

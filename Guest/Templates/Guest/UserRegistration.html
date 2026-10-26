@@ -1,0 +1,282 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Au Register Forms by Colorlib</title>
+
+    <!-- Icons font CSS-->
+    <link href="{% static 'Main/vendor/mdi-font/css/material-design-iconic-font.min.css'%}" rel="stylesheet" media="all">
+    <link href="{% static 'Main/vendor/font-awesome-4.7/css/font-awesome.min.css'%}" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <!-- <link href="{% static 'Main/vendor/select2/select2.min.css'%}" rel="stylesheet" media="all"> -->
+    <link href="{% static 'Main/vendor/datepicker/daterangepicker.css'%}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'Main/Admin Dashboard/css/bootstrap.min.css'%}" rel="stylesheet">
+
+    <link href="{% static 'Main/css/main.css'%}" rel="stylesheet" media="all">
+</head>
+
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h2 class="title">User Registration Form</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="form-row m-b-55">
+                            <div class="name">Name</div>
+                            <div class="value">
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" required name="txt_name" id=""
+                                            title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter"
+                                            pattern="^[A-Z]+[a-zA-Z ]*$" placeholder="Enter name">
+                                            <label class="label--desc">Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" name="txt_password" id="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                            required placeholder="Enter password">
+                                            <label class="label--desc">Password</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Address</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <textarea class="input--style-5" required placeholder="Enter Address" name="txt_address" id=""></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Email</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" required placeholder="Enter email" name="txt_email" id="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Contact</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="text" name="phone" required placeholder="Enter contact">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Photo</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="file" name="txt_photo" id="txt_photo" required>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="form-row m-b-55">
+                            <div class="name"></div>
+                            <div class="value">
+                                <div class="row row-refine">
+                                    <div class="col-3">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" type="file" name="txt_photo" id="txt_photo" required>
+                                            <label class="label--desc">Photo</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" type="text" name="phone">
+                                            <label class="label--desc">Phone Number</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="form-row">
+                            <div class="name">District</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="sel_district" id="sel_district" class="form-select" required>
+                                            <option value="">--select--</option>
+                                            {% for i in dis %}
+                                            <option value="{{i.id}}">{{i.district_name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Place</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="sel_place" id="sel_place" class="form-control" required>
+                                            <option value="">--select--</option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row p-t-20">
+                            <label class="label label--block">Gender</label>
+                            <div class="p-t-15">
+                                <label class="radio-container m-r-55">Male
+                                    <input type="radio" name="txt_gender" id="txt_gender" value="male" required>
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="radio-container">Female
+                                    <input type="radio" name="txt_gender" id="txt_gender" value="female" required>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div align="center">
+                            <button class="btn btn--radius-2 btn--red" type="submit" value="Submit">Register</button>
+                        </div>
+                        <div>
+                            <div align="left"><a href="{% url 'Guest:Login' %}">Already Have an Account?</a>&nbsp;
+                            <a style="display: flex; flex-direction: column;" href="{% url 'Guest:index' %}">Home</a></div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    <!-- Jquery JS-->
+    <script src="{% static 'Main/vendor/jquery/jquery.min.js'%}"></script>
+    <!-- Vendor JS-->
+    <!-- <script src="{% static 'Main/vendor/select2/select2.min.js'%}"></script> -->
+    <script src="{% static 'Main/vendor/datepicker/moment.min.js'%}"></script>
+    <script src="{% static 'Main/vendor/datepicker/daterangepicker.js'%}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'Main/js/global.js'%}"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>userregistration</title>
+</head>
+
+<body>
+    <h1 align="center">User Registration</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table align="center">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" required name="txt_name" id=""
+                        title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter"
+                        pattern="^[A-Z]+[a-zA-Z ]*$"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" required name="txt_email" id=""></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" required name="txt_contact" id="" pattern="[7-9]{1}[0-9]{9}"
+                        title="Phone number with 7-9 and remaing 9 digit with 0-9"></td>
+            </tr>
+            <tr>
+                <td>Address</Address>
+                </td>
+                <td><textarea required name="txt_address" id=""></textarea></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td><input type="radio" name="txt_gender" id="txt_gender" value="male" required>Male
+                    <input type="radio" name="txt_gender" id="txt_gender" value="female" required>Female
+                </td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" name="txt_photo" id="txt_photo" required></td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td><select name="sel_district" id="sel_district" required>
+                        <option value="">--select--</option>
+                        {% for i in dis %}
+                        <option value="{{i.id}}">{{i.district_name}}</option>
+                        {% endfor %}
+                    </select></td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td><select name="sel_place" id="sel_place" required>
+                        <option value="">--select--</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="text" name="txt_password" id="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                        required></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Submit"></td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+
+</html> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#sel_district").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Guest:ajaxplace' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#sel_place").html(data);
+            },
+        });
+    });
+</script>

@@ -1,0 +1,77 @@
+{% extends 'Admin/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Trainer</title>
+    <style>
+        td{
+            color: aliceblue;
+        }
+    table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 90%;
+        font-family: Arial, sans-serif;
+        background-color: #1a1a1a; /* black background */
+        color: #2a2a2a; /* white text */
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+    }
+
+    table th, table td {
+        border: 1px solid #ff0000; /* red borders */
+        padding: 12px 15px;
+        text-align: center;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #2a2a2a;
+    }
+
+    table tr:hover {
+        background-color: #400000; /* dark red on hover */
+    }
+
+    table th {
+        background-color: #ff0000;
+        color: #2a2a2a;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+</style>
+</head>
+<body>
+    <form action="" method="post">
+        <table class="table table-border table-hover">
+            {%csrf_token%}
+            <tr>
+                <td>Trainer</td>
+                <td><select name="sel_trainer" id="" class="form-control">
+                    <option value="">Select Trainer</option>
+                    {% for i in trainer %}
+                    <option value="{{i.id}}">{{i.trainer_name}}</option>
+                {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" class="btn btn-outline-primary"value="ASSIGN"></td>
+
+            </tr>
+        </table>
+        <br>
+        <table class="table table-border table-hover">
+            <tr><td>Trainer</td></tr>
+            <tr><td></td></tr>
+        </table>
+    </form>
+</body>
+</html>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location="{% url 'Admin:ViewAdmission' %}"
+</script>
+{% endif %}
+{% endblock %}

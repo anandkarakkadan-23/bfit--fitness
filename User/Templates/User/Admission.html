@@ -1,0 +1,95 @@
+{% extends 'User/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission</title>
+    <style>
+        td{
+            color: aliceblue;
+        }
+    table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 90%;
+        font-family: Arial, sans-serif;
+        background-color: #1a1a1a; /* black background */
+        color: #fff; /* white text */
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+    }
+
+    table th, table td {
+        border: 1px solid #ff0000; /* red borders */
+        padding: 12px 15px;
+        text-align: center;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #2a2a2a;
+    }
+
+    table tr:hover {
+        background-color: #400000; /* dark red on hover */
+    }
+
+    table th {
+        background-color: #ff0000;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+</style>
+</head>
+<body>
+    <h1 align="center">Take Admission</h1>
+    <form action="" method="post">
+        {%csrf_token%}
+        <table align="center" border="1">
+           <tr>
+            <td>Date</td>
+            <td><input type="date" name="txt_date" id="txt_date" required placeholder="Select Date"></td>
+           </tr>
+            <tr>
+                <td>Details</td>
+                <td><input type="text" name="txt_details" id="txt_details" value="" required placeholder="enter details"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+        <br>
+        <table align="center" border="1">
+            <tr>
+                <td>SL:NO</td>
+                <td>Gymplan</td>
+                <td>Date</td>
+                <td>Action</td>
+            </tr>
+            <tr>
+                {%for i in admission%}
+            <tr align="center">
+                <td>{{forloop.counter}}</td>
+                <td>{{i.gymplan.gymplan_details}}</td>
+                <td>{{i.admission_date}}</td>
+                <td><a href="{% url 'User:deladmission' i.id  id %}">Delete</a>
+                    <a href="{% url 'User:payment' i.id   %}">Payment</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </form>
+
+</body>
+
+</html>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location="{% url 'User:Admission' id %}"
+</script>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,22 @@
+# Python virtual environments
+mainenv/
+.venv/
+venv/
+
+# Python generated files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local databases and runtime media
+*.sqlite3
+*.sqlite3-journal
+media/
+Assets/File/
+
+# Local secrets and editor files
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
