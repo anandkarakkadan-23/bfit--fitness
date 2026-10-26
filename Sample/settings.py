@@ -25,9 +25,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY') or secrets.token_urlsafe(50)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'false').lower() in {'1', 'true', 'yes'}
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "bfit-fitness.vercel.app"]
+vercel_url = os.environ.get("VERCEL_URL")
+if vercel_url:
+    ALLOWED_HOSTS.append(vercel_url.strip())
+
+ALLOWED_HOSTS.extend(
+    host.strip()
+    for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",")
+    if host.strip()
+)
 
 
 # Application definition

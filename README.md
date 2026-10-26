@@ -26,6 +26,7 @@ Set a development signing key, create the local database tables, and start Djang
 
 ```powershell
 $env:DJANGO_SECRET_KEY = (python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())")
+$env:DJANGO_DEBUG = "true"
 python manage.py migrate
 python manage.py runserver
 ```
@@ -46,6 +47,8 @@ tbl_admin.objects.create(
 ```
 
 The application currently uses custom plain-text password fields and a simulated payment flow. Use only disposable local accounts; this project needs authentication and payment hardening before public deployment. Set a stable `DJANGO_SECRET_KEY` in the environment for any deployed instance. The default secret is randomly generated at startup and will invalidate sessions when the process restarts.
+
+`DEBUG` is off by default. The production Vercel hostname is allowed, Vercel's `VERCEL_URL` is added automatically when present, and extra hostnames can be supplied as a comma-separated `DJANGO_ALLOWED_HOSTS` environment variable.
 
 ## Local-only files
 
