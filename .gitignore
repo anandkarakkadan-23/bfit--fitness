@@ -12,6 +12,7 @@ __pycache__/
 *.sqlite3
 *.sqlite3-journal
 media/
+staticfiles/
 Assets/File/
 
 # Local secrets and editor files

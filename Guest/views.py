@@ -1,8 +1,12 @@
+import logging
+
+from django.db.utils import DatabaseError
 from django.shortcuts import render,redirect
 from Guest.models import *
 from Admin.models import *
 
 # Create your views here.
+logger = logging.getLogger(__name__)
 
 def userregistration(request):
     dis=tbl_district.objects.all()
@@ -65,5 +69,9 @@ def ajaxplace(request):
     return render(request,'Guest/Ajaxplace.html',{'place':Place}) 
 
 def index(request):
-    gymplan=tbl_gymplan.objects.all()
+    try:
+        gymplan = list(tbl_gymplan.objects.all())
+    except DatabaseError:
+        logger.warning("Gym plans are unavailable because the database is not ready.")
+        gymplan = []
     return render(request,'Guest/Index.html',{'data':gymplan}) 

@@ -54,6 +54,8 @@ The application currently uses custom plain-text password fields and a simulated
 
 The default SQLite database is for local development. For a live Vercel deployment, connect a PostgreSQL provider such as Neon from the Vercel Marketplace and make its `DATABASE_URL` available to the Production environment. Django uses that URL automatically when it is set. Run `python manage.py migrate` against that database once before using the app; keep the database URL in Vercel's environment settings and out of Git.
 
+Vercel collects and serves Django static files from the CDN because `STATIC_ROOT` is configured. The public landing page can render without the database, but plans and database-backed features need PostgreSQL and its migrations.
+
 ## Local-only files
 
 The SQLite database, virtual environments, Python caches, and uploaded media are excluded from Git. Run migrations to create a fresh database. Local profile uploads and chat attachments are stored under `media/` when using Django's development server.
